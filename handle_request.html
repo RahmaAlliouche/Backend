@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .section {
+      width: 45%; /* Adjust the width as desired */
+      padding: 40px;
+      background-color: #ffffff;
+      border-radius: 5px;
+    }
+
+    .left-section {
+      margin-right: 20px; /* Add margin to create spacing between sections */
+    }
+
+    .right-section {
+      margin-left: 20px;
+      margin-right: 100px; /* Add margin to create spacing between sections */
+ /* Add margin to create spacing between sections */
+    }
+
+    .section h1 {
+      text-align: center;
+      font-size: 10px;
+      margin-top: 0;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    /* CSS for input fields and select box */
+    input[type="submit"],
+    select {
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 3px;
+    }
+
+    /* CSS for form layout */
+    form {
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+      background-color: rgb(9, 216, 130);
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    /* CSS for app bar */
+    #app-bar {
+      background-color: #ffffff;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  
+    .back-arrow {
+      font-size: 38px;
+      margin-right: 10px;
+      text-decoration: none;
+      color: #0dd894;
+      font-weight: bold;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  
+    .app-title {
+      font-size: 25px;
+      margin: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* Center the submit button */
+    input[type="submit"] {
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* Display select inline */
+    form select {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* Add your custom styles here */
+  </style>
+</head>
+<body>
+  <div id="app-bar">
+    <a href="{% url 'request' %}" class="back-arrow">&#8592;</a>
+    <p class="app-title">Send</p>
+  </div>
+
+  <div class="section left-section">
+    <h1 style="font-size: 40px; color: #0dd894;">Doctor</h1>
+    <form method="post" id="doctor-form">
+      {% csrf_token %}
+      <label for="date">Date :</label>
+      <p>{{ request.date }}</p>
+
+      <label for="time">Time :</label>
+      <p>{{ request.time }}</p>
+
+      <label for="adress">Address :</label>
+      <p>{{ request.adress }}</p>
+
+      <label for="specialite">Specialite:</label>
+      <p>{{ request.specialite }}</p>
+
+      <select name="doctor" id="doctor">
+        <option value="">Select a doctor</option>
+        {% for doctor in doctors %}
+          <option value="{{ doctor.id }}">{{ doctor.name }}: {{ doctor.spécialité }}</option>
+        {% endfor %}
+      </select><br><br>
+
+      <input type="submit" value="Submit">
+    </form>   
+  </div>
+
+  <div class="section right-section">
+    <h1 style="font-size: 40px; color: #0dd894;">Driver</h1>
+    <form method="post" id="driver-form">
+      {% csrf_token %}
+      <label for="date">Date :</label>
+      <p>{{ request.date }}</p>
+
+      <label for="time">Time :</label>
+      <p>{{ request.time }}</p>
+
+      <label for="adress">Address :</label>
+      <p>{{ request.adress }}</p><br>
+      
+      <select name="driver" id="driver">
+        <option value="">Select a driver</option>
+        {% for driver in drivers %}
+          <option value="{{ driver.id }}">{{ driver.name }} {{ driver.prenom }}</option>
+        {% endfor %}
+      </select><br><br>
+        
+      <input type="submit" value="Submit">
+    </form>   
+  </div>
+</body>
+</html>
+
